@@ -1,7 +1,16 @@
 import mysql.connector
 from decimal import Decimal
 
-def stream_user_ages(connection):
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'varsath',
+    'password': 'varsath',
+    'port': 3306
+}
+DB_NAME = 'ALX_prodev'
+
+def stream_user_ages():
+    connection = mysql.connector.connect(**DB_CONFIG, database=DB_NAME)
     if not connection:
         print("Error: No database connection provided.")
         return
