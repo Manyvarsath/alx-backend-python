@@ -9,7 +9,8 @@ DB_CONFIG = {
 }
 DB_NAME = 'ALX_prodev'
 
-def paginate_users(connection, page_size, offset):
+def paginate_users(page_size, offset):
+    connection = mysql.connector.connect(**DB_CONFIG, database=DB_NAME)
     if not connection:
         return []
     
