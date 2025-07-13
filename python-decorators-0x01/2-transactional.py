@@ -33,5 +33,5 @@ def update_user_email(conn, user_id, new_email):
 
 
 #### Update user's email with automatic transaction handling 
-# Successful update
+
 update_user_email(user_id=1, new_email='Crawford_Cartwright@hotmail.com')
