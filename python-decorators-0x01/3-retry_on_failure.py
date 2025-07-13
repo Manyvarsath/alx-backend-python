@@ -5,7 +5,7 @@ import functools
 def with_db_connection(func):
 	@functools.wraps(func)
 	def wrapper(*args, **kwargs):
-		conn = sqlite3.connect('users.db')
+		conn = sqlite3.connect('../data/users.db')
 		try:
 			return func(conn, *args, **kwargs)
 		finally:
@@ -22,11 +22,11 @@ def retry_on_failure(retries=3, delay=2):
 					return func(*args, **kwargs)
 				except Exception as e:
 					last_exception = e
-					print(f"Attempt {attempt + 1} failed: {e}")
-					if attempt < retries - 1:  # Don't sleep on the last attempt
-						print(f"Retrying in {delay} seconds...")
+					print(f"Attempt {attempt} failed: {e}")
+					if attempt < retries - 1:
+						print(f"Retrying in {delay} seconds")
 						time.sleep(delay)
-			raise Exception(f"Function {func.__name__} failed after {retries} attempts. Last error: {last_exception}")
+			raise Exception(f"Function {func.__name__} failed after {retries} attempts")
 		return wrapper
 	return decorator
 
