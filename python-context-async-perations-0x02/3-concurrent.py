@@ -15,11 +15,11 @@ async def async_fetch_older_users():
 		results = await cursor.fetchall()
 		return results
 
-async def gather_funcs(): 	
+async def fetch_concurrently(): 	
 	results_all, results_older = await asyncio.gather(async_fetch_users(), async_fetch_older_users())
 	return results_all, results_older
 
-all_users, older_users = asyncio.run(gather_funcs())
+all_users, older_users = asyncio.run(fetch_concurrently())
 
 print("Output of 3 first users in the first query:")
 for i, user in enumerate(all_users):
